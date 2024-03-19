@@ -1,5 +1,5 @@
 # KryptoStore [![](https://jitpack.io/v/rumboalla/kryptostore.svg)](https://jitpack.io/#rumboalla/kryptostore)
-KryptoStore is thin wrapper around Jetpack DataStore Preferences that provides useful features.
+**KryptoStore** is thin wrapper around **Jetpack DataStore Preferences** that provides useful features.
 
 ## Features
 * Small
