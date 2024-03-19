@@ -37,7 +37,7 @@ class Prefs(context: Context) {
     val float = floatPref(context.store, "float", 42f)
     val double = doublePref(context.store, "double", 42.0)
     val string = stringPref(context.store, "string", "Don't Panic")
-    val stringSet = stringSetPref(context.store, "stringSet", setOf("string", "Don't Panic"))
+    val stringSet = stringSetPref(context.store, "stringSet", setOf("Mostly Harmless", "Don't Panic"))
 }
 
 suspend fun doSomething(context: Context) {
