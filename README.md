@@ -1,4 +1,4 @@
-# KryptoStore
+# KryptoStore [![](https://jitpack.io/v/rumboalla/kryptostore.svg)](https://jitpack.io/#rumboalla/kryptostore)
 KryptoStore is thin wrapper around Jetpack DataStore Preferences that provides useful features.
 
 ## Features
@@ -8,46 +8,115 @@ KryptoStore is thin wrapper around Jetpack DataStore Preferences that provides u
 * Encryption
 
 ## Basic Usage
-Import library: TODO
+Add the Jitpack repository
 ```kotlin
-implementation("TODO")
+maven { url = uri("https://www.jitpack.io" ) }
 ```
-Use preferences. Supported preferences: booleanPref, intPref, floatPref, doublePref, stringPref, stringSetPref.
+Import the library
 ```kotlin
-val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
-val pref = booleanPref(context.store, "testBoolean", false)
-val value = pref.get()
-pref.set(true)
+implementation("com.github.rumboalla.kryptostore:core:0.1.0")
+```
+Use preferences
+```kotlin
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import com.github.rumboalla.kryptostore.preference.booleanPref
+import com.github.rumboalla.kryptostore.preference.doublePref
+import com.github.rumboalla.kryptostore.preference.floatPref
+import com.github.rumboalla.kryptostore.preference.intPref
+import com.github.rumboalla.kryptostore.preference.stringPref
+import com.github.rumboalla.kryptostore.preference.stringSetPref
+
+private val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
+
+class Prefs(context: Context) {
+    val boolean = booleanPref(context.store, "boolean", true)
+    val int = intPref(context.store, "int", 42)
+    val float = floatPref(context.store, "float", 42f)
+    val double = doublePref(context.store, "double", 42.0)
+    val string = stringPref(context.store, "string", "Don't Panic")
+    val stringSet = stringSetPref(context.store, "stringSet", setOf("string", "Don't Panic"))
+}
+
+suspend fun doSomething(context: Context) {
+    val prefs = Prefs(context)
+    val boolean = prefs.boolean.get()
+    prefs.boolean.set(!boolean)
+    val int = prefs.int.get()
+    prefs.int.set(int + 1)
+    val float = prefs.float.get()
+    prefs.float.set(float + 1f)
+    val double = prefs.double.get()
+    prefs.double.set(double + 1.0)
+    val string = prefs.string.get()
+    prefs.string.set("$string!")
+    val stringSet = prefs.stringSet.get()
+    prefs.stringSet.set(emptySet())
+}
 ```
 
 ## Advanced Usage
-Import library for serialization
+Import the gson library for serialization
 ```kotlin
-implementation("TODO")
+implementation("com.github.rumboalla.kryptostore:gson:0.1.0")
 ```
-Create serialized preferences:
+Use serialized preferences
 ```kotlin
-data class TestData(val one: String, val two: Double)
-val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
-val pref = gsonPref(context.store, "testGsonPrefData", TestData("Don't Panic", 42.0), Gson())
-val value = pref.get()
-pref.set(TestData("Mostly Harmless", 43.0))
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import com.github.rumboalla.kryptostore.gsonPref
+import com.google.gson.Gson
+
+private val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
+private val gson = Gson()
+
+data class Data(val key: String = "", val value: Double = 0.0)
+
+class Prefs(context: Context) {
+    val data = gsonPref(context.store, "data", Data(), gson)
+}
+
+suspend fun doSomething(context: Context) {
+    val prefs = Prefs(context)
+    val data = prefs.data.get()
+    prefs.data.set(data.copy(key = "key", value = 42.0))
+}
 ```
 
 ## Encryption
-Import library for encryption
+Import the library for encryption
 ```kotlin
-implementation("TODO")
+implementation("com.github.rumboalla.kryptostore:keystore:0.1.0")
 ```
-Create encrypted preferences:
+Use encrypted preferences
 ```kotlin
-data class TestData(val one: String, val two: Double)
-val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
-val pref = encryptedKeystorePref(context.store, "testEncryptedPrefData", TestData("Don't Panic", 42.0), createGsonTransform(gson))
-val value = pref.get()
-pref.set(TestData("Mostly Harmless", 43.0))
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import com.github.rumboalla.kryptostore.createGsonTransform
+import com.google.gson.Gson
+
+private val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
+private val gson = Gson()
+
+data class Data(val key: String = "", val value: Double = 0.0)
+
+class Prefs(context: Context) {
+    val data = encryptedKeystorePref(context.store, "data", Data(), createGsonTransform(gson))
+}
+
+suspend fun doSomething(context: Context) {
+    val prefs = Prefs(context)
+    val data = prefs.data.get()
+    prefs.data.set(data.copy(key = "key", value = 42.0))
+}
 ```
 
-## TODO
-* More serialization options: Moshi, kotlinx.serialization, etc...
+## Roadmap
+* More serialization options: Moshi, kotlinx.serialization.
 * More encryption options.
