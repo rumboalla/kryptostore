@@ -14,7 +14,7 @@ maven { url = uri("https://www.jitpack.io" ) }
 ```
 Import the library
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:core:0.1.0")
+implementation("com.github.rumboalla.kryptostore:core:0.1.1")
 ```
 Use preferences
 ```kotlin
@@ -60,7 +60,7 @@ suspend fun doSomething(context: Context) {
 ## Advanced Usage
 Import the gson library for serialization
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:gson:0.1.0")
+implementation("com.github.rumboalla.kryptostore:gson:0.1.1")
 ```
 Use serialized preferences
 ```kotlin
@@ -90,7 +90,7 @@ suspend fun doSomething(context: Context) {
 ## Encryption
 Import the library for encryption
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:keystore:0.1.0")
+implementation("com.github.rumboalla.kryptostore:keystore:0.1.1")
 ```
 Use encrypted preferences
 ```kotlin
