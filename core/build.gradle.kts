@@ -43,12 +43,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.github.rumboalla.kryptostore"
-            artifactId = "core"
-            version = "0.1.0"
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = "com.github.rumboalla.kryptostore"
+                artifactId = "core"
+                version = "0.1.1"
+                from(components["release"])
+            }
         }
     }
 }
