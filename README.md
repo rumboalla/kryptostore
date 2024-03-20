@@ -120,3 +120,7 @@ suspend fun doSomething(context: Context) {
 ## Roadmap
 * More serialization options: Moshi, kotlinx.serialization.
 * More encryption options.
+
+## License
+Copyright © 2024 rumboalla.  
+Licensed under the [MIT](https://github.com/rumboalla/kryptostore/blob/master/LICENSE) license.
