@@ -23,4 +23,5 @@ open class GenericPreference<T>(
     override suspend fun get() = flow.first()
     override suspend fun set(v: T) { store.edit { it[key] = transform.transform(v) } }
     override fun flow() = flow
+    override fun defaultValue(): T = defValue
 }

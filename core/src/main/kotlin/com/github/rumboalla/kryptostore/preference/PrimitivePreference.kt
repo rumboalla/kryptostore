@@ -17,4 +17,5 @@ open class PrimitivePreference<T>(
     override suspend fun get() = flow.first()
     override suspend fun set(v: T) { store.edit { it[key] = v } }
     override fun flow() = flow
+    override fun defaultValue(): T = defValue
 }

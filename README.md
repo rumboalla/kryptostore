@@ -14,7 +14,7 @@ maven { url = uri("https://www.jitpack.io" ) }
 ```
 Import the library
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:core:0.1.1")
+implementation("com.github.rumboalla.kryptostore:core:0.1.2")
 ```
 Use preferences
 ```kotlin
@@ -60,7 +60,7 @@ suspend fun doSomething(context: Context) {
 ## Advanced Usage
 Import the gson library for serialization
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:gson:0.1.1")
+implementation("com.github.rumboalla.kryptostore:gson:0.1.2")
 ```
 Use serialized preferences
 ```kotlin
@@ -90,7 +90,7 @@ suspend fun doSomething(context: Context) {
 ## Encryption
 Import the library for encryption
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:keystore:0.1.1")
+implementation("com.github.rumboalla.kryptostore:keystore:0.1.2")
 ```
 Use encrypted preferences
 ```kotlin
@@ -114,6 +114,37 @@ suspend fun doSomething(context: Context) {
     val prefs = Prefs(context)
     val data = prefs.data.get()
     prefs.data.set(data.copy(key = "key", value = 42.0))
+}
+```
+
+## Compose
+Extensions for compose. Import the library
+```kotlin
+implementation("com.github.rumboalla.kryptostore:compose:0.1.2")
+```
+Use it
+```kotlin
+import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import com.github.rumboalla.kryptostore.preference.booleanPref
+
+private val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
+
+class Prefs(context: Context) {
+    val boolean = booleanPref(context.store, "boolean", true)
+}
+
+@Composable
+fun Component(prefs: Prefs) {
+    val state = prefs.boolean.collectAsStateWithLifecycle()
+    if (state.value) {
+        Text("Pref is true.")
+    } else {
+        Text("Pref is false.")
+    }
 }
 ```
 

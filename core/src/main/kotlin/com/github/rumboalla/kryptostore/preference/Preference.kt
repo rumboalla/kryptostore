@@ -35,4 +35,19 @@ interface Preference<T> {
      */
     @DangerousApi
     fun getBlocking() = runBlocking { get() }
+
+    /**
+     * Sets the value of a preference. This call blocks until the preference is set.
+     *
+     * @param   v   {@T}   Value {@T} to set in the preference.
+     */
+    @DangerousApi
+    fun setBlocking(v: T) = runBlocking { set(v) }
+
+    /**
+     * Gets the default value of a preference.
+     *
+     * @return  {@T}  Value of the preference.
+     */
+    fun defaultValue(): T
 }

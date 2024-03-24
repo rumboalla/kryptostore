@@ -19,3 +19,4 @@ rootProject.name = "KryptoStore"
 include(":core")
 include(":gson")
 include(":keystore")
+include(":compose")

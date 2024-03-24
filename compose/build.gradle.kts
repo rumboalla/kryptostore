@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.github.rumboalla.kryptostore.keystore"
+    namespace = "com.github.rumboalla.kryptostore.compose"
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 23
+        minSdk = 21
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -36,10 +36,12 @@ android {
 
 dependencies {
     api(project(":core"))
+    api("androidx.compose.ui:ui:1.6.4")
+    api("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation(project(":gson"))
+    androidTestImplementation(project(":core"))
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
@@ -49,7 +51,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("maven") {
                 groupId = "com.github.rumboalla.kryptostore"
-                artifactId = "keystore"
+                artifactId = "compose"
                 version = "0.1.2"
                 from(components["release"])
             }

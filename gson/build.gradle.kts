@@ -51,7 +51,7 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 groupId = "com.github.rumboalla.kryptostore"
                 artifactId = "gson"
-                version = "0.1.1"
+                version = "0.1.2"
                 from(components["release"])
             }
         }
