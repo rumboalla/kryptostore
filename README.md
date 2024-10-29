@@ -14,7 +14,7 @@ maven { url = uri("https://www.jitpack.io" ) }
 ```
 Import the library
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:core:0.1.2")
+implementation("com.github.rumboalla.kryptostore:core:0.1.3")
 ```
 Use preferences
 ```kotlin
@@ -57,10 +57,10 @@ suspend fun doSomething(context: Context) {
 }
 ```
 
-## Advanced Usage
+## Serialization (Gson)
 Import the gson library for serialization
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:gson:0.1.2")
+implementation("com.github.rumboalla.kryptostore:gson:0.1.3")
 ```
 Use serialized preferences
 ```kotlin
@@ -87,10 +87,40 @@ suspend fun doSomething(context: Context) {
 }
 ```
 
+## Serialization (kotlinx.serialization)
+Import the kotlinx.serialization library for serialization
+```kotlin
+implementation("com.github.rumboalla.kryptostore:kxs:0.1.3")
+```
+Use serialized preferences
+```kotlin
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import com.github.rumboalla.kryptostore.kxsPref
+import kotlinx.serialization.Serializable
+
+private val Context.store: DataStore<Preferences> by preferencesDataStore(name = "prefs")
+
+@Serializable
+data class Data(val key: String = "", val value: Double = 0.0)
+
+class Prefs(context: Context) {
+    val data = kxsPref(context.store, "data", Data(), gson)
+}
+
+suspend fun doSomething(context: Context) {
+    val prefs = Prefs(context)
+    val data = prefs.data.get()
+    prefs.data.set(data.copy(key = "key", value = 42.0))
+}
+```
+
 ## Encryption
 Import the library for encryption
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:keystore:0.1.2")
+implementation("com.github.rumboalla.kryptostore:keystore:0.1.3")
 ```
 Use encrypted preferences
 ```kotlin
@@ -120,7 +150,7 @@ suspend fun doSomething(context: Context) {
 ## Compose
 Extensions for compose. Import the library
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:compose:0.1.2")
+implementation("com.github.rumboalla.kryptostore:compose:0.1.3")
 ```
 Use it
 ```kotlin
@@ -149,7 +179,7 @@ fun Component(prefs: Prefs) {
 ```
 
 ## Roadmap
-* More serialization options: Moshi, kotlinx.serialization.
+* More serialization options: Moshi.
 * More encryption options.
 
 ## License

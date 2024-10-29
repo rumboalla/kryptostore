@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.github.rumboalla.kryptostore.gson"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
-        minSdk = 16
+        minSdk = 19
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,19 +30,19 @@ android {
     }
 
     testOptions {
-        targetSdk = 34
+        targetSdk = 35
     }
 }
 
 dependencies {
-    api("com.google.code.gson:gson:2.10.1")
+    api("com.google.code.gson:gson:2.11.0")
     api(project(":core"))
 
     testImplementation("junit:junit:4.13.2")
 
     androidTestImplementation(project(":core"))
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
 }
 
 afterEvaluate {
@@ -51,7 +51,7 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 groupId = "com.github.rumboalla.kryptostore"
                 artifactId = "gson"
-                version = "0.1.2"
+                version = "0.1.3"
                 from(components["release"])
             }
         }
