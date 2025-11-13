@@ -9,7 +9,7 @@ import kotlin.reflect.typeOf
 
 
 @OptIn(ExperimentalStdlibApi::class)
-inline fun <reified T : Any> createKxsTransform(): KxsTransform<T> = KxsTransform(typeOf<T>().javaType)
+inline fun <reified T> createKxsTransform(): KxsTransform<T> = KxsTransform(typeOf<T>().javaType)
 
-inline fun <reified T : Any> kxsPref(store: DataStore<Preferences>, name: String, defValue: T) =
+inline fun <reified T> kxsPref(store: DataStore<Preferences>, name: String, defValue: T) =
     genPref(store, name, defValue, createKxsTransform())

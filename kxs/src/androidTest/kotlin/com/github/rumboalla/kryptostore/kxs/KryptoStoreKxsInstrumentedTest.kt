@@ -31,6 +31,20 @@ class KryptoStoreKxsInstrumentedTest {
     }
 
     @Test
+    fun testKxsNullData() = runBlocking {
+        val data = TestData("Don't Panic", 42.0)
+        val pref = kxsPref<TestData?>(context.store, "testGsonPrefData", null)
+        assertEquals(pref.get(), null)
+        pref.set(data)
+        pref.get().let {
+            assertEquals(it?.one, data.one)
+            assertEquals(it?.two, data.two)
+        }
+        pref.set(null)
+        assertEquals(pref.get(), null)
+    }
+
+    @Test
     fun testKxsPrefData() = runBlocking {
         val data = TestData("Don't Panic", 42.0)
         val data2 = TestData("Mostly Harmless", 43.0)

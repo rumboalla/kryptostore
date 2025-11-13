@@ -1,16 +1,18 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    kotlin("plugin.serialization") version "2.0.20"
+    kotlin("plugin.serialization") version "2.2.21"
     id("maven-publish")
 }
 
 android {
     namespace = "com.github.rumboalla.kryptostore.kxs"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = 19
+        minSdk = 21
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,8 +28,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
+        }
     }
 
     testOptions {
@@ -36,14 +40,14 @@ android {
 }
 
 dependencies {
-    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
     api(project(":core"))
 
     testImplementation("junit:junit:4.13.2")
 
     androidTestImplementation(project(":core"))
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
 }
 
 afterEvaluate {
@@ -52,7 +56,7 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 groupId = "com.github.rumboalla.kryptostore"
                 artifactId = "kxs"
-                version = "0.1.3"
+                version = "0.1.4"
                 from(components["release"])
             }
         }

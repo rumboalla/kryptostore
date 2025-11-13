@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -6,10 +8,10 @@ plugins {
 
 android {
     namespace = "com.github.rumboalla.kryptostore.gson"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = 19
+        minSdk = 21
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,24 +27,26 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
+        }
     }
 
     testOptions {
-        targetSdk = 35
+        targetSdk = 36
     }
 }
 
 dependencies {
-    api("com.google.code.gson:gson:2.11.0")
+    api("com.google.code.gson:gson:2.13.2")
     api(project(":core"))
 
     testImplementation("junit:junit:4.13.2")
 
     androidTestImplementation(project(":core"))
-    androidTestImplementation("androidx.test:runner:1.6.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
 }
 
 afterEvaluate {
@@ -51,7 +55,7 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 groupId = "com.github.rumboalla.kryptostore"
                 artifactId = "gson"
-                version = "0.1.3"
+                version = "0.1.4"
                 from(components["release"])
             }
         }
