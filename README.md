@@ -14,7 +14,7 @@ maven { url = uri("https://www.jitpack.io" ) }
 ```
 Import the library
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:core:0.1.4")
+implementation("com.github.rumboalla.kryptostore:core:0.1.5")
 ```
 Use preferences
 ```kotlin
@@ -60,7 +60,7 @@ suspend fun doSomething(context: Context) {
 ## Serialization (Gson)
 Import the gson library for serialization
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:gson:0.1.4")
+implementation("com.github.rumboalla.kryptostore:gson:0.1.5")
 ```
 Use serialized preferences
 ```kotlin
@@ -90,7 +90,7 @@ suspend fun doSomething(context: Context) {
 ## Serialization (kotlinx.serialization)
 Import the kotlinx.serialization library for serialization
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:kxs:0.1.4")
+implementation("com.github.rumboalla.kryptostore:kxs:0.1.5")
 ```
 Use serialized preferences
 ```kotlin
@@ -120,7 +120,7 @@ suspend fun doSomething(context: Context) {
 ## Encryption
 Import the library for encryption
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:keystore:0.1.4")
+implementation("com.github.rumboalla.kryptostore:keystore:0.1.5")
 ```
 Use encrypted preferences
 ```kotlin
@@ -150,7 +150,7 @@ suspend fun doSomething(context: Context) {
 ## Compose
 Extensions for compose. Import the library
 ```kotlin
-implementation("com.github.rumboalla.kryptostore:compose:0.1.4")
+implementation("com.github.rumboalla.kryptostore:compose:0.1.5")
 ```
 Use it
 ```kotlin

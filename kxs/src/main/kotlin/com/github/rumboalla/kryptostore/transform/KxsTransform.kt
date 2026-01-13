@@ -5,17 +5,17 @@ import kotlinx.serialization.serializer
 import java.lang.reflect.Type
 
 
-class KxsTransform<T>(private val type: Type): Transform<T> {
+class KxsTransform<T>(private val json: Json, private val type: Type): Transform<T> {
 
     override fun transform(t: T): String {
         if (t == null) return "{}"
-        return Json.encodeToString(serializer(type), t)
+        return json.encodeToString(serializer(type), t)
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun transform(t: String): T {
         if (t == "{}") return null as T
-        return Json.decodeFromString(serializer(type), t) as T
+        return json.decodeFromString(serializer(type), t) as T
     }
 
 }

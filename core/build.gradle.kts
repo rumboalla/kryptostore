@@ -11,7 +11,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    api("androidx.datastore:datastore-preferences:1.1.7")
+    api("androidx.datastore:datastore-preferences:1.2.0")
 
     testImplementation("junit:junit:4.13.2")
 
@@ -53,7 +53,7 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 groupId = "com.github.rumboalla.kryptostore"
                 artifactId = "core"
-                version = "0.1.4"
+                version = "0.1.5"
                 from(components["release"])
             }
         }
